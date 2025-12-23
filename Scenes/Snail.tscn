@@ -92,7 +92,7 @@ size = Vector2(22, 17)
 [node name="AnimatedSprite2D" parent="." index="1" unique_id=1019082715]
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_lfuvt")
-frame_progress = 0.7407558
+frame_progress = 0.3428836
 
 [node name="CollisionShape2D" parent="." index="2" unique_id=665010093]
 position = Vector2(0, -1)
@@ -102,3 +102,7 @@ shape = SubResource("RectangleShape2D_1feet")
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_5346s")
 debug_color = Color(0.81834203, 0.35783523, 0.5030467, 0.41960785)
+
+[node name="FloorDitection" type="RayCast2D" parent="." index="4" unique_id=320400181]
+position = Vector2(-15, 0)
+target_position = Vector2(0, 17)
