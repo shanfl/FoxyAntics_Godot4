@@ -1,0 +1,14 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build",
+        "type": "dotnet",
+        "task": "build",
+        "group": "build",
+        "problemMatcher": ["$msCompile"]
+      }
+    ]
+  }
+
+  //res://assets/backgrounds/game_background_1/layers/clouds_1.png
