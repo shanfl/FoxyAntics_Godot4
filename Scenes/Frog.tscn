@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://c55415iol51i2"]
+
+[ext_resource type="PackedScene" uid="uid://dg3e50jo75brq" path="res://Scenes/EnemyBase.tscn" id="1_evecu"]
+[ext_resource type="Script" uid="uid://ibsaeyclaeuc" path="res://Frog.cs" id="2_b2kjn"]
+[ext_resource type="Texture2D" uid="uid://cbmf36utxa3da" path="res://assets/enemies/frog/frog_sheet.png" id="3_b2kjn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqyq2"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7v6p"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_peq77"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlqxu"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83710"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(140, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2md2"]
+atlas = ExtResource("3_b2kjn")
+region = Rect2(175, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_al80u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqyq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7v6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_peq77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlqxu")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_83710")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2md2")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxfq1"]
+size = Vector2(21, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hjs70"]
+radius = 11.0
+
+[node name="Frog" unique_id=1106887498 node_paths=PackedStringArray("_jumpTimer") instance=ExtResource("1_evecu")]
+script = ExtResource("2_b2kjn")
+_jumpTimer = NodePath("JumpTimer")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1019082715]
+sprite_frames = SubResource("SpriteFrames_al80u")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=665010093]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_pxfq1")
+
+[node name="HitBox" parent="." index="3" unique_id=37540839]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=1040048310]
+shape = SubResource("CircleShape2D_hjs70")
+debug_color = Color(0.9293202, 0.1858185, 0.48476136, 0.41960785)
+
+[node name="JumpTimer" type="Timer" parent="." index="4" unique_id=706874857]
+one_shot = true

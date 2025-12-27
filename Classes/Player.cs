@@ -63,14 +63,14 @@ public partial class Player : CharacterBody2D
 
 		if(Input.IsActionPressed("left"))
 		{
-			GD.Print("Left pressed");
+			//GD.Print("Left pressed");
 			newVelocity.X -= MOVE_SPEED;
 			_sprite2D.FlipH = true;
 
 		}
 		if(Input.IsActionPressed("right"))
 		{
-			GD.Print("right pressed");
+			//GD.Print("right pressed");
 			newVelocity.X += MOVE_SPEED;
 			_sprite2D.FlipH = false;
 		} 
