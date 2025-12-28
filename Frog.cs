@@ -7,7 +7,18 @@ public partial class Frog : EnemyBase
 
 	private float MinJumpTime = 1.0f;
 	private float MaxJumpTime = 3.0f;
+
+
+	private const float JUMP_VELOCITY_X = 100.0f;
+	private const float Jump_VELOCITY_Y = 150.0f;
+
+
+	private static readonly Vector2 JUMP_VELOCITY_R = new Vector2(JUMP_VELOCITY_X, -Jump_VELOCITY_Y);
+	private static readonly Vector2 JUMP_VELOCITY_L = new Vector2(-JUMP_VELOCITY_X, -Jump_VELOCITY_Y);
+
+
 	private bool _seenPlayer = false;
+	private bool _jump = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -20,9 +31,22 @@ public partial class Frog : EnemyBase
     {
         GD.Print("Frog Jump!");
 
+		_jump = true;
 		// continue jump
-		StartJumpTimer();
+		//StartJumpTimer();
     }
+
+
+	private void ApplyJump()
+	{
+		if(IsOnFloor() && _seenPlayer && _jump)
+		{
+			_jump = false;
+			_animatedSprite2D.Play("jump");
+			Velocity = _animatedSprite2D.FlipH ? JUMP_VELOCITY_R : JUMP_VELOCITY_L;
+			StartJumpTimer();
+		}
+	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -42,6 +66,20 @@ public partial class Frog : EnemyBase
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if(!IsOnFloor())
+		{
+			Vector2 velocity = Velocity;
+			velocity.Y += _gravity * (float)delta;
+			Velocity = velocity;
+		}
+		else
+		{
+			Velocity = new Vector2(0, 0);
+			_animatedSprite2D.Play("idle");
+		}
+
+		ApplyJump();
+		MoveAndSlide();
 		FlipMe();
 	}
 
