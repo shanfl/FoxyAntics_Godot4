@@ -20,6 +20,7 @@ public partial class Eagle : EnemyBase
 
 	private void SetDirectionAndFlip()
 	{
+		GD.Print("Eagle is setting direction towards the player!");
 		int xDirection = Math.Sign(_player.GlobalPosition.X - GlobalPosition.X);
 		_animatedSprite2D.FlipH = xDirection  > 0;
 		_flyDirection = new Vector2(FLY_SPEED.X * xDirection, FLY_SPEED.Y);
@@ -34,6 +35,7 @@ public partial class Eagle : EnemyBase
 
     private void OndirectionChangeTimerTimeout()
     {
+		GD.Print("Eagle is changing direction towards the player!");
         FlyTowardsPlayer();
     }
 
@@ -46,6 +48,7 @@ public partial class Eagle : EnemyBase
 
 	protected override void OnScreenEntered()
 	{	
+		 GD.Print("Eagle has seen the player!");
 		_animatedSprite2D.Play("fly");
 		FlyTowardsPlayer();
 	}

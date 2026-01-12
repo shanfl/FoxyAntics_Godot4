@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cwxg2305xh75t"]
+[gd_scene load_steps=11 format=3 uid="uid://cwxg2305xh75t"]
 
 [ext_resource type="PackedScene" uid="uid://dg3e50jo75brq" path="res://Scenes/EnemyBase.tscn" id="1_m7pf5"]
 [ext_resource type="Script" uid="uid://dkearc26vetbi" path="res://Scenes/Eagle.cs" id="2_4kihs"]
@@ -35,7 +35,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0fk42")
 }],
-"loop": false,
+"loop": true,
 "name": &"fly",
 "speed": 4.0
 }]
@@ -46,27 +46,32 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4kihs"]
 radius = 13.0
 
-[node name="Eagle" unique_id=1106887498 instance=ExtResource("1_m7pf5")]
+[node name="Eagle" node_paths=PackedStringArray("_directionChangeTimer") instance=ExtResource("1_m7pf5")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_4kihs")
+_directionChangeTimer = NodePath("DirectTimer")
 
-[node name="AnimatedSprite2D" parent="." index="1" unique_id=1019082715]
+[node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_h3myu")
 animation = &"fly"
 
-[node name="CollisionShape2D" parent="." index="2" unique_id=665010093]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_efqjt")
 debug_color = Color(0.93348867, 0.18757004, 0.45513588, 0.41960785)
 
-[node name="HitBox" parent="." index="3" unique_id=37540839]
+[node name="HitBox" parent="." index="3"]
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=1040048310]
+[node name="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource("CircleShape2D_4kihs")
 
-[node name="RayCast2D" type="RayCast2D" parent="." index="4" unique_id=97430333]
+[node name="PlayerDetector" type="RayCast2D" parent="." index="4"]
+target_position = Vector2(0, 200)
 collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 
-[node name="DirectTimer" type="Timer" parent="." index="5" unique_id=1240528354]
+[node name="DirectTimer" type="Timer" parent="." index="5"]
+wait_time = 2.0

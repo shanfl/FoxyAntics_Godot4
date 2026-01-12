@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://k1urmk4wr0pe"]
+[gd_scene load_steps=6 format=3 uid="uid://k1urmk4wr0pe"]
 
 [ext_resource type="Script" uid="uid://pqw2awnddyy5" path="res://Classes/Player.cs" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://dr5212rmwa7if" path="res://assets/player/player.png" id="1_rpqav"]
@@ -7,115 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyqiw"]
 size = Vector2(11, 19)
 
-[sub_resource type="Animation" id="Animation_gntrk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gntrk"]
+size = Vector2(15, 19)
 
-[sub_resource type="Animation" id="Animation_dewec"]
-resource_name = "fall"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [18]
-}
-
-[sub_resource type="Animation" id="Animation_5ixxa"]
-resource_name = "hurt"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.10307488),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [11, 12]
-}
-
-[sub_resource type="Animation" id="Animation_nn08x"]
-resource_name = "idle"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0014776456, 0.103435196, 0.2009598, 0.304395),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [13, 14, 15, 16]
-}
-
-[sub_resource type="Animation" id="Animation_52ee3"]
-resource_name = "jump"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [17]
-}
-
-[sub_resource type="Animation" id="Animation_bhhdu"]
-resource_name = "run"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0973485, 0.20233217, 0.30731583),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_megsn"]
-_data = {
-&"RESET": SubResource("Animation_gntrk"),
-&"fall": SubResource("Animation_dewec"),
-&"hurt": SubResource("Animation_5ixxa"),
-&"idle": SubResource("Animation_nn08x"),
-&"jump": SubResource("Animation_52ee3"),
-&"run": SubResource("Animation_bhhdu")
-}
-
-[node name="Player" type="CharacterBody2D" unique_id=448019419 node_paths=PackedStringArray("_sprite2D", "_jumpSound", "_animationPlayer") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite2D", "_jumpSound", "_animationPlayer") groups=["Player"]]
 position = Vector2(0, -16)
 collision_layer = 0
 script = ExtResource("1_kyqiw")
@@ -123,25 +18,33 @@ _sprite2D = NodePath("Sprite2D")
 _jumpSound = NodePath("Sound")
 _animationPlayer = NodePath("AnimationPlayer")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=999380731]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_rpqav")
 hframes = 19
 frame = 14
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1964448874]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 5.5)
 shape = SubResource("RectangleShape2D_kyqiw")
 
-[node name="DebugLabel" type="Label" parent="." unique_id=752555262]
+[node name="DebugLabel" type="Label" parent="."]
 offset_left = -25.0
 offset_top = -31.0
 offset_right = 24.0
 offset_bottom = -8.0
 text = "debug"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2037516947]
-libraries/ = SubResource("AnimationLibrary_megsn")
-autoplay = &"idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
 
-[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1416784306]
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gntrk")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_gntrk")
+debug_color = Color(0.91172624, 0.2574845, 0.37983173, 0.41960785)
