@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cwxg2305xh75t"]
+
+[ext_resource type="PackedScene" uid="uid://dg3e50jo75brq" path="res://Scenes/EnemyBase.tscn" id="1_m7pf5"]
+[ext_resource type="Script" uid="uid://dkearc26vetbi" path="res://Scenes/Eagle.cs" id="2_4kihs"]
+[ext_resource type="Texture2D" uid="uid://paa1uullbgow" path="res://assets/enemies/eagle/eagle-attack.png" id="2_efqjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kihs"]
+atlas = ExtResource("2_efqjt")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4nah"]
+atlas = ExtResource("2_efqjt")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8v87"]
+atlas = ExtResource("2_efqjt")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fk42"]
+atlas = ExtResource("2_efqjt")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h3myu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kihs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4nah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8v87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fk42")
+}],
+"loop": false,
+"name": &"fly",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_efqjt"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kihs"]
+radius = 13.0
+
+[node name="Eagle" unique_id=1106887498 instance=ExtResource("1_m7pf5")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_4kihs")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=1019082715]
+sprite_frames = SubResource("SpriteFrames_h3myu")
+animation = &"fly"
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=665010093]
+shape = SubResource("CircleShape2D_efqjt")
+debug_color = Color(0.93348867, 0.18757004, 0.45513588, 0.41960785)
+
+[node name="HitBox" parent="." index="3" unique_id=37540839]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=1040048310]
+shape = SubResource("CircleShape2D_4kihs")
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="4" unique_id=97430333]
+collision_mask = 2
+
+[node name="DirectTimer" type="Timer" parent="." index="5" unique_id=1240528354]

@@ -92,9 +92,6 @@ public partial class Frog : EnemyBase
 
 			StartJumpTimer();
 		}
-		
-		
-
 	}
 
 }
