@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c3su71dyubur1"]
+[gd_scene load_steps=12 format=4 uid="uid://c3su71dyubur1"]
 
 [ext_resource type="Script" uid="uid://cewu4k3uaao6t" path="res://Classes/LevelBase.cs" id="1_wrhoe"]
 [ext_resource type="Texture2D" uid="uid://becqtvpk7iqdd" path="res://assets/tiles/Terrain (16x16).png" id="3_7375l"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://jeo7d0r3hghe" path="res://Scenes/Snail.tscn" id="4_dci62"]
 [ext_resource type="PackedScene" uid="uid://c55415iol51i2" path="res://Scenes/Frog.tscn" id="5_236eb"]
 [ext_resource type="PackedScene" uid="uid://cwxg2305xh75t" path="res://Scenes/Eagle.tscn" id="6_c43mv"]
+[ext_resource type="PackedScene" uid="uid://g1thneji78fx" path="res://Scenes/EnemyBullet.tscn" id="7_aw1t8"]
+[ext_resource type="PackedScene" uid="uid://c1f7eepryg4bq" path="res://Scenes/ObjectMaker.tscn" id="8_jp55m"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_7375l"]
 tile_data = PackedInt32Array(0, 393216, 0, 1, 458752, 0, 2, 524288, 0)
@@ -220,3 +222,8 @@ position = Vector2(725, 338)
 
 [node name="Eagle" parent="." instance=ExtResource("6_c43mv")]
 position = Vector2(-281, -108)
+
+[node name="EnemyBullet" parent="." instance=ExtResource("7_aw1t8")]
+position = Vector2(97, 444)
+
+[node name="ObjectMaker" parent="." instance=ExtResource("8_jp55m")]
