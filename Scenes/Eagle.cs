@@ -5,6 +5,9 @@ public partial class Eagle : EnemyBase
 {
 	[Export] private Timer _directionChangeTimer;
 
+	[Export] RayCast2D _playerDector;
+	[Export] Shooter _shooter;
+
 	private readonly Vector2 FLY_SPEED  = new Vector2(35,15);
 	private Vector2 _flyDirection = Vector2.Zero;
 
@@ -17,6 +20,16 @@ public partial class Eagle : EnemyBase
 
         _directionChangeTimer.Timeout += OndirectionChangeTimerTimeout;
     }
+
+	public void Shoot()
+	{
+		if(_playerDector.IsColliding())
+		{ 
+			//Vector2 dir = (_playerDector.GetColliderAs<Node2D>().GlobalPosition - GlobalPosition).Normalized();
+			Vector2 dir2 = GlobalPosition.DirectionTo(_player.GlobalPosition);
+			_shooter.Shoot(dir2);
+		}
+	}
 
 	private void SetDirectionAndFlip()
 	{
@@ -44,6 +57,7 @@ public partial class Eagle : EnemyBase
 	{
 		Velocity = _flyDirection;
 		MoveAndSlide();
+		Shoot();
 	}
 
 	protected override void OnScreenEntered()

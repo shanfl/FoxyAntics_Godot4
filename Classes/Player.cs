@@ -19,6 +19,8 @@ public partial class Player : CharacterBody2D
 
 	[Export] private AnimationPlayer _animationPlayer;
 
+	[Export] private Shooter _shooter;
+
 	public const string GroupName = "Player";
 
 	private enum PlayerState
@@ -28,6 +30,11 @@ public partial class Player : CharacterBody2D
 		Jump,
 		Fall,
 		Hurt
+	}
+
+	public void Shoot()
+	{
+		_shooter.Shoot(_sprite2D.FlipH ? Vector2.Left : Vector2.Right);
 	}
 
 
@@ -45,7 +52,7 @@ public partial class Player : CharacterBody2D
 	{
 		Velocity = GetInput((float)delta);
 		MoveAndSlide();
-
+		Shoot();
 		CaculateState();
 	}
 

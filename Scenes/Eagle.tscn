@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwxg2305xh75t"]
+[gd_scene load_steps=12 format=3 uid="uid://cwxg2305xh75t"]
 
 [ext_resource type="PackedScene" uid="uid://dg3e50jo75brq" path="res://Scenes/EnemyBase.tscn" id="1_m7pf5"]
 [ext_resource type="Script" uid="uid://dkearc26vetbi" path="res://Scenes/Eagle.cs" id="2_4kihs"]
 [ext_resource type="Texture2D" uid="uid://paa1uullbgow" path="res://assets/enemies/eagle/eagle-attack.png" id="2_efqjt"]
+[ext_resource type="PackedScene" uid="uid://dkni8s0smjyb7" path="res://Scenes/Shooter.tscn" id="4_t4nah"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4kihs"]
 atlas = ExtResource("2_efqjt")
@@ -46,11 +47,13 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4kihs"]
 radius = 13.0
 
-[node name="Eagle" node_paths=PackedStringArray("_directionChangeTimer") instance=ExtResource("1_m7pf5")]
+[node name="Eagle" node_paths=PackedStringArray("_directionChangeTimer", "_playerDector", "_shooter") instance=ExtResource("1_m7pf5")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_4kihs")
 _directionChangeTimer = NodePath("DirectTimer")
+_playerDector = NodePath("PlayerDetector")
+_shooter = NodePath("Shooter")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_h3myu")
@@ -75,3 +78,7 @@ collide_with_bodies = false
 
 [node name="DirectTimer" type="Timer" parent="." index="5"]
 wait_time = 2.0
+
+[node name="Shooter" parent="." index="6" instance=ExtResource("4_t4nah")]
+_speed = 100.0
+_bulletKey = 3
