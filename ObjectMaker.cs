@@ -14,12 +14,30 @@ public partial class ObjectMaker : Node2D
 		//_objectScenes[GameObjectType.Pickup] = GD.Load<PackedScene>("res://Scenes/Pickup.tscn");
 		_objectScenes[GameObjectType.BulletEnemy] = GD.Load<PackedScene>("res://Scenes/EnemyBullet.tscn");
 		_objectScenes[GameObjectType.BulletPlayer] = GD.Load<PackedScene>("res://Scenes/PlayerBullet.tscn");
+		_objectScenes[GameObjectType.Explosion] = GD.Load<PackedScene>("res://Scenes/Explosion.tscn");
 
 		SignalManager.Instance.OnCreateBullet += OnCreateBullet;
+		SignalManager.Instance.OnCreateObject += OnCreateObject;
 
 	}
 
-	private void AddObject(Node node)
+	public override void _ExitTree()
+	{
+		SignalManager.Instance.OnCreateBullet -= OnCreateBullet;
+		SignalManager.Instance.OnCreateObject -= OnCreateObject;
+	}
+
+    private void OnCreateObject(Vector2 position, int gameObjectType)
+    {
+        if (_objectScenes.TryGetValue((GameObjectType)gameObjectType, out var scene))
+		{
+			var obj = scene.Instantiate<Node2D>();
+			obj.GlobalPosition = position;
+			CallDeferred(MethodName.AddObject, obj);
+		}
+    }
+
+    private void AddObject(Node node)
 	{
 		AddChild(node);
 	}
