@@ -17,6 +17,7 @@ public partial class BulletBase : Area2D
 
 	private void OnAreaEntered(Area2D area)
 	{
+		GD.Print("Bullet Hit Area: " + area.Name);
 		QueueFree();
 	}
 

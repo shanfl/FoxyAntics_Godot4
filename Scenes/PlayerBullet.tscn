@@ -12,6 +12,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_65pnx")
+debug_color = Color(0.2864887, 0.61678416, 0.38353837, 0.41960785)
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_65pnx")

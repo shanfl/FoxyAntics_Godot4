@@ -15,6 +15,7 @@ public partial class ObjectMaker : Node2D
 		_objectScenes[GameObjectType.BulletEnemy] = GD.Load<PackedScene>("res://Scenes/EnemyBullet.tscn");
 		_objectScenes[GameObjectType.BulletPlayer] = GD.Load<PackedScene>("res://Scenes/PlayerBullet.tscn");
 		_objectScenes[GameObjectType.Explosion] = GD.Load<PackedScene>("res://Scenes/Explosion.tscn");
+		_objectScenes[GameObjectType.Pickup] = GD.Load<PackedScene>("res://Scenes/FruitPickUp.tscn");
 
 		SignalManager.Instance.OnCreateBullet += OnCreateBullet;
 		SignalManager.Instance.OnCreateObject += OnCreateObject;

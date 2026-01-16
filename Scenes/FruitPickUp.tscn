@@ -1,8 +1,11 @@
-[gd_scene load_steps=39 format=3 uid="uid://cxd1us4uxv5vh"]
+[gd_scene load_steps=40 format=3 uid="uid://cxd1us4uxv5vh"]
 
 [ext_resource type="Script" uid="uid://bt5dgtaxtj7hd" path="res://Scenes/FruitPickUp.cs" id="1_m1qaw"]
 [ext_resource type="Texture2D" uid="uid://cy78thlaqs0u4" path="res://assets/items/Melon.png" id="1_yof0k"]
 [ext_resource type="Texture2D" uid="uid://c88pwteshmtxn" path="res://assets/items/Cherries.png" id="2_m1qaw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1qaw"]
+radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ramfa"]
 atlas = ExtResource("1_yof0k")
@@ -263,6 +266,7 @@ _animatedSprite2D = NodePath("AnimatedSprite2D")
 _lifetimeTimer = NodePath("Timer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m1qaw")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
@@ -273,4 +277,4 @@ autostart = true
 sprite_frames = SubResource("SpriteFrames_quxt1")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.32709628
+frame_progress = 0.52996105

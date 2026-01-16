@@ -12,6 +12,11 @@ public partial class FruitPickUp : Area2D
 	[Export] private Timer _lifetimeTimer;
 	[Export] private float _gravity = 400.0f;
 
+
+	private float _startY;
+	private float _speedY;
+	private bool _stopped = false;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -19,6 +24,9 @@ public partial class FruitPickUp : Area2D
 		AreaEntered += OnAreaEntered;
 
 		PlayRandomAnimation();		
+
+		_speedY = _jump;
+		_startY = Position.Y;
 	}
 
 	private void PlayRandomAnimation()
@@ -40,6 +48,7 @@ public partial class FruitPickUp : Area2D
     {
         QueueFree();
 		//SignalManager.Instance.Em
+		SignalManager.EmitOnPickupHit(_points);//, GlobalPosition);
     }
 
 
@@ -51,5 +60,15 @@ public partial class FruitPickUp : Area2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+		if(_stopped) return;
+
+		Position += new Vector2(0, _speedY) * (float)delta;
+		_speedY += _gravity * (float)delta;
+
+		if(Position.Y >= _startY)
+		{
+			//Position = new Vector2(Position.X, _startY);
+			_stopped = true;
+		}
 	}
 }

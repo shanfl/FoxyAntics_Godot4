@@ -24,15 +24,22 @@ public partial class EnemyBase : CharacterBody2D
 	public override void _Ready()
 	{
 
+		GD.Print("EnemyBase _Ready");
 		_player = GetTree().GetFirstNodeInGroup(Player.GroupName) as Player;
 		_visibleOnScreenNotifier2D.ScreenExited += OnScreenExited;
 		_visibleOnScreenNotifier2D.ScreenEntered += OnScreenEntered;
 
-		_hitBoxArea2D.BodyEntered += OnHitBoxBodyEntered;
+		_hitBoxArea2D.AreaEntered += OnHitBoxAreaEntered;
 
 	}
 
-	private void FallenOff()
+    private void OnHitBoxAreaEntered(Area2D area)
+    {
+		GD.Print("Enemy Hit by: " + area.Name + " _hitBoxArea2D: " + _hitBoxArea2D.Name);
+		Die();
+    }
+
+    private void FallenOff()
 	{
 		if(GlobalPosition.Y > _yFallOff)
 		{
