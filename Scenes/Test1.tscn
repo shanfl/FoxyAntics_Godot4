@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4ghy3v0ucj18"]
+
+[ext_resource type="Texture2D" uid="uid://c53h1ufhxj412" path="res://assets/enemies/boss/boss.png" id="1_r4pug"]
+
+[sub_resource type="Curve2D" id="Curve2D_5as1u"]
+_data = {
+"points": PackedVector2Array(16.528925, 106.6867, -16.528925, -106.6867, 19, 44, 0, 0, 0, 0, 831, -4, -81.49181, -171.84143, 81.49181, 171.84143, 1010, 297, -63.7762, -233.84607, 63.7762, 233.84607, 994, 556, 0, 0, 0, 0, 805, 692, 42.517467, 432.26093, -42.517467, -432.26093, 277, 646, 0, 0, 0, 0, 110, 295, 0, 0, 0, 0, 19, 44)
+}
+point_count = 8
+
+[node name="Test1" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_5as1u")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(19, 44)
+rotation = -1.7245039
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_r4pug")

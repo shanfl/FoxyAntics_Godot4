@@ -18,8 +18,18 @@ public partial class Player : CharacterBody2D
 	[Export] private PlayerState _currentState = PlayerState.Idle;
 
 	[Export] private AnimationPlayer _animationPlayer;
-
+	[Export] private AnimationPlayer _animationPlayerInv;
+	[Export] private Timer _invincibleTimer;
+	[Export] private Timer _hurtTimer;
+	[Export] private Area2D _hitBox;
 	[Export] private Shooter _shooter;
+
+	[Export] private bool _invincible = false;
+
+	[Export] private int _lives = 5;
+
+
+	private static readonly Vector2 HURT_UP = new Vector2(0, -200.0f);
 
 	public const string GroupName = "Player";
 
@@ -41,10 +51,78 @@ public partial class Player : CharacterBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_invincibleTimer.Timeout += OnInvincibleTimerTimeout;
+		_hitBox.AreaEntered += OnHitBoxAreaEntered;
+		_hurtTimer.Timeout += OnHurtTimerTimeout;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	private void ApplyHurtJump()
+	{
+		Velocity = HURT_UP;
+		_animationPlayer.Play("hurt");
+		_hurtTimer.Start();
+		
+	}
+
+    private void OnHurtTimerTimeout()
+    {
+        //throw new NotImplementedException();
+		SetState(PlayerState.Idle);
+    }
+
+
+    private void OnHitBoxAreaEntered(Area2D area)
+    {
+        //throw new NotImplementedException();
+		ApplyHit();
+    }
+
+
+	private bool ReduceLives()
+	{
+		_lives -= 1;
+		GD.Print("Player Dead",_lives);
+		if(_lives <= 0)
+		{
+			//GD.Print("Game Over");
+			//GetTree().ChangeSceneToFile("res://Scenes/GameOver.tscn");
+			
+			SetPhysicsProcess(false);
+			return false;
+		}
+		return true;	
+	}
+
+    private void ApplyHit()
+    {
+		if(_invincible) return;
+
+		if(!ReduceLives())		{			return;		}
+
+		GoInvincible();
+        ///throw new NotImplementedException(); 
+		SetState(PlayerState.Hurt);
+		SoundManager.PlayClip(_jumpSound,SoundManager.SOUND_DAMAGE);
+    }
+
+    private void GoInvincible()
+    {
+        //throw new NotImplementedException();
+		_invincible = true;
+		_animationPlayerInv.Play("invincible");
+		_invincibleTimer.Start();
+    }
+
+
+    private void OnInvincibleTimerTimeout()
+    {
+        //throw new NotImplementedException();
+		_invincible = false;
+		_animationPlayerInv.Play("RESET");
+    }
+
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
 	{
 	}
 
@@ -52,16 +130,23 @@ public partial class Player : CharacterBody2D
 	{
 		Velocity = GetInput((float)delta);
 		MoveAndSlide();
-		Shoot();
+		//Shoot();
 		CaculateState();
 	}
 
     private Vector2 GetInput(float delta)
     {
         Vector2 newVelocity = Velocity;
-
 		newVelocity.X = 0;
 		newVelocity.Y += GRAVITY*delta;
+
+		if(_currentState == PlayerState.Hurt)
+		{
+			return newVelocity;
+		}
+
+		
+		
 
 		// left/right movement
 		// jump
@@ -101,6 +186,11 @@ public partial class Player : CharacterBody2D
 
 	private void CaculateState()
 	{
+		if(_currentState == PlayerState.Hurt)
+		{
+			return;
+		}
+
 		PlayerState state;
 
 		if (IsOnFloor())
@@ -153,7 +243,8 @@ public partial class Player : CharacterBody2D
 				_animationPlayer.Play("fall");
 				break;
 			case PlayerState.Hurt:
-				_animationPlayer.Play("hurt");
+				//_animationPlayer.Play("hurt");
+				ApplyHurtJump();
 				break;
 		}
 	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://k1urmk4wr0pe"]
+[gd_scene load_steps=10 format=3 uid="uid://k1urmk4wr0pe"]
 
 [ext_resource type="Script" uid="uid://pqw2awnddyy5" path="res://Classes/Player.cs" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://dr5212rmwa7if" path="res://assets/player/player.png" id="1_rpqav"]
@@ -11,13 +11,56 @@ size = Vector2(11, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gntrk"]
 size = Vector2(15, 19)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite2D", "_jumpSound", "_animationPlayer", "_shooter") groups=["Player"]]
+[sub_resource type="Animation" id="Animation_dewec"]
+resource_name = "invincible"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.39937174),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.03529412), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5ixxa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn08x"]
+_data = {
+&"RESET": SubResource("Animation_5ixxa"),
+&"invincible": SubResource("Animation_dewec")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite2D", "_jumpSound", "_animationPlayer", "_animationPlayerInv", "_invincibleTimer", "_hurtTimer", "_hitBox", "_shooter") groups=["Player"]]
 position = Vector2(0, -16)
 collision_layer = 0
 script = ExtResource("1_kyqiw")
 _sprite2D = NodePath("Sprite2D")
 _jumpSound = NodePath("Sound")
 _animationPlayer = NodePath("AnimationPlayer")
+_animationPlayerInv = NodePath("AnimationPlayerInv")
+_invincibleTimer = NodePath("InvincibleTimer")
+_hurtTimer = NodePath("HurtTimer")
+_hitBox = NodePath("HitBox")
 _shooter = NodePath("Shooter")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -56,3 +99,15 @@ position = Vector2(7, 6)
 _speed = 100.0
 _lifeSpan = 20.0
 _bulletKey = 2
+
+[node name="InvincibleTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="AnimationPlayerInv" type="AnimationPlayer" parent="."]
+root_node = NodePath("../InvincibleTimer")
+libraries = {
+&"": SubResource("AnimationLibrary_nn08x")
+}
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5

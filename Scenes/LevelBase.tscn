@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c3su71dyubur1"]
+[gd_scene load_steps=17 format=4 uid="uid://c3su71dyubur1"]
 
 [ext_resource type="Script" uid="uid://cewu4k3uaao6t" path="res://Classes/LevelBase.cs" id="1_wrhoe"]
 [ext_resource type="Texture2D" uid="uid://becqtvpk7iqdd" path="res://assets/tiles/Terrain (16x16).png" id="3_7375l"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://g1thneji78fx" path="res://Scenes/EnemyBullet.tscn" id="7_aw1t8"]
 [ext_resource type="PackedScene" uid="uid://c1f7eepryg4bq" path="res://Scenes/ObjectMaker.tscn" id="8_jp55m"]
 [ext_resource type="PackedScene" uid="uid://cxd1us4uxv5vh" path="res://Scenes/FruitPickUp.tscn" id="9_045t7"]
+[ext_resource type="PackedScene" uid="uid://dg4cexnfiftsw" path="res://Scenes/BallSpikes.tscn" id="10_tprgi"]
+[ext_resource type="PackedScene" uid="uid://cal1it3ska23d" path="res://Scenes/Spikes.tscn" id="11_o6tce"]
+[ext_resource type="PackedScene" uid="uid://bljseibje40v2" path="res://Scenes/Hud.tscn" id="12_l8cc0"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_7375l"]
 tile_data = PackedInt32Array(0, 393216, 0, 1, 458752, 0, 2, 524288, 0)
@@ -23,10 +26,13 @@ texture = ExtResource("3_7375l")
 4:0/0 = 0
 6:0/0 = 0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:0/0/physics_layer_0/polygon_0/one_way = true
 7:0/0 = 0
 7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0/physics_layer_0/polygon_0/one_way = true
 8:0/0 = 0
 8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:0/0/physics_layer_0/polygon_0/one_way = true
 9:0/0 = 0
 9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:0/0 = 0
@@ -49,10 +55,13 @@ texture = ExtResource("3_7375l")
 4:1/0 = 0
 6:1/0 = 0
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0/physics_layer_0/polygon_0/one_way = true
 7:1/0 = 0
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0/physics_layer_0/polygon_0/one_way = true
 8:1/0 = 0
 8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:1/0/physics_layer_0/polygon_0/one_way = true
 9:1/0 = 0
 9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:1/0 = 0
@@ -73,10 +82,13 @@ texture = ExtResource("3_7375l")
 2:2/0 = 0
 6:2/0 = 0
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:2/0/physics_layer_0/polygon_0/one_way = true
 7:2/0 = 0
 7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0/physics_layer_0/polygon_0/one_way = true
 8:2/0 = 0
 8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:2/0/physics_layer_0/polygon_0/one_way = true
 13:2/0 = 0
 13:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 14:2/0 = 0
@@ -93,10 +105,13 @@ texture = ExtResource("3_7375l")
 4:4/0 = 0
 6:4/0 = 0
 6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:4/0/physics_layer_0/polygon_0/one_way = true
 7:4/0 = 0
 7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:4/0/physics_layer_0/polygon_0/one_way = true
 8:4/0 = 0
 8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:4/0/physics_layer_0/polygon_0/one_way = true
 9:4/0 = 0
 9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:4/0 = 0
@@ -117,10 +132,13 @@ texture = ExtResource("3_7375l")
 4:5/0 = 0
 6:5/0 = 0
 6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:5/0/physics_layer_0/polygon_0/one_way = true
 7:5/0 = 0
 7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:5/0/physics_layer_0/polygon_0/one_way = true
 8:5/0 = 0
 8:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:5/0/physics_layer_0/polygon_0/one_way = true
 9:5/0 = 0
 9:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:5/0 = 0
@@ -139,10 +157,13 @@ texture = ExtResource("3_7375l")
 2:6/0 = 0
 6:6/0 = 0
 6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:6/0/physics_layer_0/polygon_0/one_way = true
 7:6/0 = 0
 7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:6/0/physics_layer_0/polygon_0/one_way = true
 8:6/0 = 0
 8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:6/0/physics_layer_0/polygon_0/one_way = true
 13:6/0 = 0
 14:6/0 = 0
 15:6/0 = 0
@@ -203,6 +224,12 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_dci62")
 pattern_0 = SubResource("TileMapPattern_7375l")
 
+[sub_resource type="Curve2D" id="Curve2D_045t7"]
+_data = {
+"points": PackedVector2Array(-32, 58, 32, -58, -188, 299, -19, -2, 19, 2, 115, 388, 10, -31, -10, 31, 162, 454, 67, -7, -67, 7, -160, 434, 0, 0, 0, 0, -188, 299)
+}
+point_count = 5
+
 [node name="LevelBase" type="Node2D"]
 script = ExtResource("1_wrhoe")
 
@@ -231,3 +258,20 @@ position = Vector2(97, 444)
 
 [node name="FruitPickUp" parent="ObjectMaker" instance=ExtResource("9_045t7")]
 position = Vector2(332, 364)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_045t7")
+
+[node name="BallSpikes" parent="Path2D" instance=ExtResource("10_tprgi")]
+position = Vector2(-188, 299)
+
+[node name="Spikes" parent="." instance=ExtResource("11_o6tce")]
+position = Vector2(73, 69)
+
+[node name="Spikes2" parent="." instance=ExtResource("11_o6tce")]
+position = Vector2(95, 69)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("12_l8cc0")]
