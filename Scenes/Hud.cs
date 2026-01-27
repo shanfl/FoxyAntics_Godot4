@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 public partial class Hud : Control
@@ -9,12 +10,13 @@ public partial class Hud : Control
 	[Export] private HBoxContainer _hbHearts;
 
 
-	private List<TextureRect> _hearts = new List<TextureRect>();
+	private List<TextureRect> _hearts;// = new List<TextureRect>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_hearts = _hbHearts.GetChildren().OfType<TextureRect>().ToList();
+		ConnectSignals();
 	}
 
 	private void ConnectSignals( )
@@ -23,15 +25,31 @@ public partial class Hud : Control
 		SignalManager.Instance.OnScoreUpdated += OnScoreUpdated;
 	}
 
+    public override void _ExitTree()
+    {
+        //base._ExitTree();
+    }
+
+
     private void OnScoreUpdated()
     {
-        throw new NotImplementedException();
+        
     }
 
 
     private void OnPlayerHit(int lives)
     {
-        throw new NotImplementedException();
+        for(int i = 0; i < _hearts.Count; i++)
+		{
+			if(i < lives)
+			{
+				_hearts[i].Visible = true;
+			}
+			else
+			{
+				_hearts[i].Visible = false;
+			}
+		}
     }
 
 

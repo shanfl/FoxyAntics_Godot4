@@ -54,9 +54,17 @@ public partial class Player : CharacterBody2D
 		_invincibleTimer.Timeout += OnInvincibleTimerTimeout;
 		_hitBox.AreaEntered += OnHitBoxAreaEntered;
 		_hurtTimer.Timeout += OnHurtTimerTimeout;
+
+		//SignalManager.EmitOnPlayerHit(_lives);
+		CallDeferred(MethodName.LateInit);
 	}
 
-	private void ApplyHurtJump()
+    private void LateInit()
+    {
+        SignalManager.EmitOnPlayerHit(_lives);
+    }
+
+    private void ApplyHurtJump()
 	{
 		Velocity = HURT_UP;
 		_animationPlayer.Play("hurt");
@@ -82,6 +90,7 @@ public partial class Player : CharacterBody2D
 	{
 		_lives -= 1;
 		GD.Print("Player Dead",_lives);
+		SignalManager.EmitOnPlayerHit(_lives);
 		if(_lives <= 0)
 		{
 			//GD.Print("Game Over");

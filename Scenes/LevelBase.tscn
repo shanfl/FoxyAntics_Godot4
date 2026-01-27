@@ -272,6 +272,5 @@ position = Vector2(73, 69)
 position = Vector2(95, 69)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("12_l8cc0")]
