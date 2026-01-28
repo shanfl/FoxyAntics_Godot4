@@ -1,0 +1,168 @@
+[gd_scene load_steps=16 format=3 uid="uid://ca2nyd64qc7c"]
+
+[ext_resource type="Texture2D" uid="uid://do0xpby04lqht" path="res://assets/items/checkpoint.png" id="1_2v1l2"]
+[ext_resource type="Script" uid="uid://c632nwqtekswc" path="res://Scenes/CheckPoint.cs" id="1_ar8gg"]
+[ext_resource type="AudioStream" uid="uid://cq1hmc4df3w4j" path="res://assets/sound/pickup3.ogg" id="2_mhttq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cp0i"]
+size = Vector2(17, 43)
+
+[sub_resource type="Animation" id="Animation_5gm33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ar8gg"]
+resource_name = "appear"
+length = 2.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4, 1.5, 1.6, 1.7, 1.8000001, 1.9, 2, 2.1000001, 2.2, 2.3, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [26, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_mhttq")
+}],
+"times": PackedFloat32Array(0.4)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_vhgpm"]
+resource_name = "flap"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhgpm"]
+_data = {
+&"RESET": SubResource("Animation_5gm33"),
+&"appear": SubResource("Animation_ar8gg"),
+&"flap": SubResource("Animation_vhgpm")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhttq"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ar8gg"]
+animation = &"appear"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5gm33"]
+animation = &"flap"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhgpm"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"on_trigger"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_40qdp"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38ene"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_chib4"]
+states/RESET/node = SubResource("AnimationNodeAnimation_mhttq")
+states/RESET/position = Vector2(364, 100)
+states/Start/position = Vector2(198, 100)
+states/appear/node = SubResource("AnimationNodeAnimation_ar8gg")
+states/appear/position = Vector2(529, 100)
+states/flap/node = SubResource("AnimationNodeAnimation_5gm33")
+states/flap/position = Vector2(678, 100)
+transitions = ["RESET", "appear", SubResource("AnimationNodeStateMachineTransition_vhgpm"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_40qdp"), "appear", "flap", SubResource("AnimationNodeStateMachineTransition_38ene")]
+
+[node name="CheckPoint" type="Area2D" node_paths=PackedStringArray("_animationTree", "_sound")]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+script = ExtResource("1_ar8gg")
+_animationTree = NodePath("AnimationTree")
+_sound = NodePath("Sound")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(33.5, -23.5)
+shape = SubResource("RectangleShape2D_2cp0i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(9, -32)
+texture = ExtResource("1_2v1l2")
+hframes = 26
+vframes = 3
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(33.5, -23.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vhgpm")
+}
+autoplay = "appear"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+deterministic = false
+tree_root = SubResource("AnimationNodeStateMachine_chib4")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/on_trigger = false

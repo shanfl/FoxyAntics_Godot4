@@ -6,7 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://dwoj7dgthifc0" path="res://assets/LG_white_24.tres" id="3_rhayu"]
 [ext_resource type="Texture2D" uid="uid://dt5hg3rgdmqow" path="res://assets/items/pixel heart 2.png" id="4_gyfy3"]
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("_scoreLabel", "_hbHearts")]
+[node name="Hud" type="Control" node_paths=PackedStringArray("_scoreLabel", "_hbHearts", "_colorRect", "_vbLevelComplete", "_vbGameOver", "_continueTimer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +16,10 @@ grow_vertical = 2
 script = ExtResource("1_3j5vs")
 _scoreLabel = NodePath("MarginContainer/Label")
 _hbHearts = NodePath("MarginContainer/HBHearts")
+_colorRect = NodePath("ColorRect")
+_vbLevelComplete = NodePath("ColorRect/VBComplete")
+_vbGameOver = NodePath("ColorRect/VBGameOver")
+_continueTimer = NodePath("Timer")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -126,3 +130,5 @@ stretch_mode = 4
 layout_mode = 2
 texture = ExtResource("4_gyfy3")
 stretch_mode = 4
+
+[node name="Timer" type="Timer" parent="."]

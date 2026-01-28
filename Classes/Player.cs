@@ -95,7 +95,7 @@ public partial class Player : CharacterBody2D
 		{
 			//GD.Print("Game Over");
 			//GetTree().ChangeSceneToFile("res://Scenes/GameOver.tscn");
-			
+			SignalManager.EmitOnGameOver();
 			SetPhysicsProcess(false);
 			return false;
 		}

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2h5s58nj2nan"]
+
+[ext_resource type="Script" uid="uid://rsj6raug0lsg" path="res://test_scenes/PathFollow2d.cs" id="1_7rwpp"]
+[ext_resource type="Texture2D" uid="uid://becqtvpk7iqdd" path="res://assets/tiles/Terrain (16x16).png" id="1_gs6fv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rwpp"]
+size = Vector2(45, 9)
+
+[node name="PathFollow2D" type="PathFollow2D"]
+script = ExtResource("1_7rwpp")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_7rwpp")
+one_way_collision = true
+debug_color = Color(0.8706032, 0.34086272, 0.22225839, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("1_gs6fv")
+region_enabled = true
+region_rect = Rect2(0, 64, 47, 9)

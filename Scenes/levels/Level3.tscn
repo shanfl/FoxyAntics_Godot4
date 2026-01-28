@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d184kis6m0ha6"]
+
+[ext_resource type="PackedScene" uid="uid://c3su71dyubur1" path="res://Scenes/LevelBase.tscn" id="1_hp6ct"]
+[ext_resource type="PackedScene" uid="uid://cwxg2305xh75t" path="res://Scenes/Eagle.tscn" id="2_gb4wr"]
+
+[node name="Level3" instance=ExtResource("1_hp6ct")]
+
+[node name="Eagle" parent="." index="13" instance=ExtResource("2_gb4wr")]
+position = Vector2(143, 103)

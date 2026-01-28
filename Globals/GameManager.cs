@@ -8,7 +8,7 @@ public partial class GameManager : Node
     
     private Dictionary<int, PackedScene> _levels = new Dictionary<int, PackedScene>();
 
-    private PackedScene _mainScene = GD.Load<PackedScene>("res://Scenes/Main/Main.tscn");
+    private PackedScene _mainScene = GD.Load<PackedScene>("res://Scenes/main.tscn");
 
     int _currentLevel = 0;
 
@@ -18,7 +18,22 @@ public partial class GameManager : Node
 	public override void _Ready()
 	{
         Instance = this;
+
+
+        for(int i = 0;i < TotalLevels; i++)
+        {
+            _levels[i] = GD.Load<PackedScene>($"res://Scenes/levels/Level{i + 1}.tscn");
+        }
 	}
+
+    private void SetNextLevel()
+    {
+        _currentLevel++;
+        if(_currentLevel > TotalLevels)
+        {
+            _currentLevel = 1;
+        }
+    }
 
     public static void LoadNextLevelScene()
     {
@@ -31,6 +46,7 @@ public partial class GameManager : Node
 
     public static void LoadMainScene()
     {
+        Instance._currentLevel = 0;
         Instance.GetTree().ChangeSceneToPacked(Instance._mainScene);
     }
 }

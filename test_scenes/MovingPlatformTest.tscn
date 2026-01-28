@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://v58y1q1k67yk"]
+
+[ext_resource type="PackedScene" uid="uid://d2h5s58nj2nan" path="res://test_scenes/PathFollow2d.tscn" id="1_p5m4b"]
+[ext_resource type="Texture2D" uid="uid://5psfiiu0trsa" path="res://icon.svg" id="2_5vokk"]
+[ext_resource type="PackedScene" uid="uid://c6pu1dof7s7ib" path="res://test_scenes/MovingPlatformAni.tscn" id="3_07ew7"]
+
+[sub_resource type="Curve2D" id="Curve2D_5vokk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 40, 30, 0, 0, 0, 0, 462, 34, 0, 0, 0, 0, 467, 160, 0, 0, 0, 0, 40, 158, 0, 0, 0, 0, 40, 30)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07ew7"]
+size = Vector2(16, 15)
+
+[node name="MovingPlatformTest" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_5vokk")
+
+[node name="PathFollow2D" parent="Path2D" instance=ExtResource("1_p5m4b")]
+position = Vector2(40, 30)
+rotation = 0.009478389
+rotates = false
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(41, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_5vokk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_07ew7")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(72, 323)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(460, 316)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(462, 484)
+
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(69, 473)
+
+[node name="MovingPlatformAni" parent="." node_paths=PackedStringArray("_points") instance=ExtResource("3_07ew7")]
+position = Vector2(74, 323)
+_points = [NodePath("../Marker2D"), NodePath("../Marker2D2"), NodePath("../Marker2D3"), NodePath("../Marker2D4")]
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(75, 305)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_5vokk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+shape = SubResource("RectangleShape2D_07ew7")

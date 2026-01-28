@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://co76uwxbag5la"]
+
+[ext_resource type="PackedScene" uid="uid://c3su71dyubur1" path="res://Scenes/LevelBase.tscn" id="1_s11j7"]
+[ext_resource type="PackedScene" uid="uid://c55415iol51i2" path="res://Scenes/Frog.tscn" id="2_mvny7"]
+
+[node name="Level2" instance=ExtResource("1_s11j7")]
+
+[node name="Frog" parent="." index="13" instance=ExtResource("2_mvny7")]
+position = Vector2(497, 404)

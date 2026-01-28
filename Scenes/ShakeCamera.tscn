@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://7qx5t4s2l4lj"]
+
+[ext_resource type="Script" uid="uid://b1pwywxip3qyp" path="res://Scenes/ShakeCamera.cs" id="1_ahfe4"]
+
+[node name="ShakeCamera" type="Camera2D" node_paths=PackedStringArray("_shakeTimer")]
+script = ExtResource("1_ahfe4")
+_shakeTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

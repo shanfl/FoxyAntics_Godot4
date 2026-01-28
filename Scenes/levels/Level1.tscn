@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce0n2yfpmmjkq"]
+
+[ext_resource type="PackedScene" uid="uid://c3su71dyubur1" path="res://Scenes/LevelBase.tscn" id="1_adt8j"]
+[ext_resource type="PackedScene" uid="uid://jeo7d0r3hghe" path="res://Scenes/Snail.tscn" id="2_7xv87"]
+
+[node name="Level1" instance=ExtResource("1_adt8j")]
+
+[node name="Snail" parent="." index="13" instance=ExtResource("2_7xv87")]
+position = Vector2(511, 407)

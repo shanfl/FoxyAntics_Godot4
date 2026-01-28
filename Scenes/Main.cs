@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class LevelBase : Node2D
+public partial class Main : Control
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -11,14 +11,17 @@ public partial class LevelBase : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Input.IsActionJustPressed("next"))
+		if(Input.IsActionJustPressed("shoot"))
 		{
+			//GetTree().Quit();
+			GD.Print("Next Level");
+			ScoreManager.ResetScore();
 			GameManager.LoadNextLevelScene();
 		}
 
 		if(Input.IsActionJustPressed("quit"))
 		{
-			GameManager.LoadMainScene();
+			GetTree().Quit();
 		}
 	}
 }
