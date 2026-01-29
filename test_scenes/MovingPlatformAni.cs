@@ -37,6 +37,9 @@ public partial class MovingPlatformAni : AnimatableBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		SignalManager.Instance.OnGameOver 		+= OnGameOver;
+		SignalManager.Instance.OnLevelComplete 	+= OnLevelComplete;
+
 		GlobalPosition = _points[0].GlobalPosition;
 		
 		SetupPoints();
@@ -44,7 +47,28 @@ public partial class MovingPlatformAni : AnimatableBody2D
 		RunTween();
 	}
 
-	private void SetupPoints()
+	public override void _ExitTree()
+    {	
+		KillTween();
+		SignalManager.Instance.OnGameOver 		-= OnGameOver;
+		SignalManager.Instance.OnLevelComplete 	-= OnLevelComplete;
+    }
+
+    private void OnLevelComplete()
+    {
+        //throw new NotImplementedException();
+		KillTween();
+    }
+
+
+    private void OnGameOver()
+    {
+        //throw new NotImplementedException();
+		KillTween();
+
+    }
+
+    private void SetupPoints()
 	{
 		if(_points.Count < 2)
 		{
@@ -63,13 +87,13 @@ public partial class MovingPlatformAni : AnimatableBody2D
 		}
 	}
 
-    public override void _ExitTree()
-    {
-        if(	_tween != null)
+	private void KillTween()
+	{
+		if(	_tween != null)
 		{
 			_tween.Kill();
 		}
-    }
+	}
 
 	private void RunTween()
 	{

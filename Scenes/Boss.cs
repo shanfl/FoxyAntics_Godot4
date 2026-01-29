@@ -69,7 +69,8 @@ public partial class Boss : Node2D
 			_hitTween.Kill();
 		}
 		SignalManager.EmitOnBossKilled(_points);//, GlobalPosition);
-		QueueFree();
+		CallDeferred(MethodName.QueueFree);
+		//QueueFree();
 	}
 
     private void OnHitBoxAreaEntered(Area2D area)

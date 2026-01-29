@@ -6,6 +6,7 @@ using System.Linq;
 
 public partial class Hud : Control
 {
+	private const string MOVABLES = "Moveables";
 	[Export] private Label _scoreLabel;
 	[Export] private HBoxContainer _hbHearts;
 
@@ -49,6 +50,23 @@ public partial class Hud : Control
 		SignalManager.Instance.OnScoreUpdated 	-= OnScoreUpdated;
 		SignalManager.Instance.OnGameOver 		-= OnGameOver;
 		SignalManager.Instance.OnLevelComplete 	-= OnLevelComplete;
+	}
+
+
+	public void StopAllMovables()
+	{  
+
+		// Pause method
+		GetTree().Paused = true;
+		return;
+		//
+		List<Node2D> movables = GetTree().GetNodesInGroup(MOVABLES).OfType<Node2D>().ToList();
+		foreach(Node2D node in movables)
+		{
+			GD.Print("====> ", node.Name);
+			node.SetProcess(false);
+			node.SetPhysicsProcess(false);
+		}
 	}
 
 	private void ShowHud(bool gameover)
@@ -118,6 +136,13 @@ public partial class Hud : Control
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+		
+		if (Input.IsActionJustPressed("stop"))
+		{
+			GD.Print("stop!!!!!!!!!!!!!!!!!!!!!!!!!!");	
+			StopAllMovables();
+		}
+
 		if(_canContinue && Input.IsActionJustPressed("shoot"))
 		{
 			if(_vbLevelComplete.Visible)

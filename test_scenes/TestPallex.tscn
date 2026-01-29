@@ -1,17 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxxfumxfsc6ih"]
 
-[ext_resource type="Texture2D" uid="uid://c67n0sb01b4xf" path="res://assets/backgrounds/game_background_3/game_background_3.1.png" id="1_j68ns"]
-[ext_resource type="Texture2D" uid="uid://8ev6e8sj8ija" path="res://assets/backgrounds/game_background_1/game_background_1.png" id="2_q5dqp"]
+[ext_resource type="Texture2D" uid="uid://bv58xewvcl4mu" path="res://assets/backgrounds/game_background_2/layers/sky.png" id="2_q5dqp"]
+[ext_resource type="Texture2D" uid="uid://jobr1gkfvy31" path="res://assets/backgrounds/game_background_2/layers/rocks_2.png" id="3_j6q5n"]
 [ext_resource type="Script" uid="uid://b47utnd6gcir3" path="res://test_scenes/Camera2d.cs" id="3_q5dqp"]
 
 [node name="TestPallex" type="Node2D"]
 position = Vector2(0, 3)
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-texture = ExtResource("1_j68ns")
-centered = false
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 4)
+anchor_mode = 0
+script = ExtResource("3_q5dqp")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 
@@ -19,7 +18,9 @@ centered = false
 texture = ExtResource("2_q5dqp")
 centered = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, 4)
-anchor_mode = 0
-script = ExtResource("3_q5dqp")
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(21, -24)
+texture = ExtResource("3_j6q5n")
+centered = false
